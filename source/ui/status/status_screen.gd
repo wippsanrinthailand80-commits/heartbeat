@@ -100,7 +100,7 @@ func _add_header(text: String) -> void:
 
 func _add_row(label_text: String, value_text: String = "") -> void:
 	var hbox := HBoxContainer.new()
-	hbox.theme_override_constants["separation"] = 20
+	hbox.add_theme_constant_override("separation", 20)
 
 	var lbl := Label.new()
 	lbl.text = label_text
