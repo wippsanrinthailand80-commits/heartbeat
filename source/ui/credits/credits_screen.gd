@@ -88,7 +88,7 @@ func _add_section_header(text: String) -> void:
 
 func _add_credit_entry(role: String, name_text: String, note: String) -> void:
 	var vbox := VBoxContainer.new()
-	vbox.theme_override_constants/separation = 2
+	vbox.theme_override_constants["separation"] = 2
 
 	var role_label := Label.new()
 	role_label.text = role

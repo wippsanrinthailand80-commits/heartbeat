@@ -100,7 +100,7 @@ func _add_header(text: String) -> void:
 
 func _add_row(label_text: String, value_text: String = "") -> void:
 	var hbox := HBoxContainer.new()
-	hbox.theme_override_constants/separation = 20
+	hbox.theme_override_constants["separation"] = 20
 
 	var lbl := Label.new()
 	lbl.text = label_text
@@ -134,7 +134,6 @@ func _add_separator() -> void:
 func _add_section(text: String) -> void:
 	var label := Label.new()
 	label.text = text
-	label.add_theme_font_size_override("font_size", 28
-	)
+	label.add_theme_font_size_override("font_size", 28)
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	content.add_child(label)
