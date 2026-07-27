@@ -15,6 +15,7 @@ var full_text: String = ""
 var is_text_complete: bool = false
 var is_typing: bool = false
 var current_character_index: int = 0
+var _choice_lock: bool = false
 
 const BASE_TEXT_SPEED := 0.03
 
@@ -41,10 +42,12 @@ func apply_settings() -> void:
 func _on_dialogue_started() -> void:
 	visible = true
 	choice_container.visible = false
+	_choice_lock = false
 
 func _on_dialogue_ended() -> void:
 	visible = false
 	choice_container.visible = false
+	_choice_lock = false
 
 func _on_line_displayed(speaker: String, text: String, emotion: String) -> void:
 	full_text = text
@@ -115,10 +118,13 @@ func _complete_text_immediately() -> void:
 	continue_indicator.visible = true
 
 func _on_choices_presented(choices: Array) -> void:
+	_choice_lock = true
 	choice_container.visible = true
 
 	for child in choice_container.get_children():
 		child.queue_free()
+
+	await get_tree().process_frame
 
 	for i in range(choices.size()):
 		var choice: Dictionary = choices[i]
@@ -126,18 +132,30 @@ func _on_choices_presented(choices: Array) -> void:
 		button.text = choice.get("text", "Choice %d" % (i + 1))
 		button.custom_minimum_size = Vector2(600, 80)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		button.pressed.connect(_on_choice_button_pressed.bind(i))
-		button.gui_input.connect(_on_choice_input.bind(i))
+		button.mouse_filter = Control.MOUSE_FILTER_STOP
+		button.gui_input.connect(_on_choice_gui_input.bind(i, button))
 		choice_container.add_child(button)
 
-func _on_choice_input(event: InputEvent, _index: int) -> void:
-	if event is InputEventScreenTouch and not event.pressed:
-		get_viewport().set_input_as_handled()
+	_choice_lock = false
 
-func _on_choice_button_pressed(index: int) -> void:
-	get_viewport().set_input_as_handled()
-	DialogueManager.make_choice(index)
+func _on_choice_gui_input(event: InputEvent, index: int, button: Button) -> void:
+	var is_press := false
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		is_press = true
+	elif event is InputEventScreenTouch and event.pressed:
+		is_press = true
+
+	if is_press:
+		button.modulate = Color(0.7, 0.7, 0.7)
+		get_viewport().set_input_as_handled()
+		_select_choice(index)
+
+func _select_choice(index: int) -> void:
+	if _choice_lock:
+		return
+	_choice_lock = true
 	choice_container.visible = false
+	DialogueManager.make_choice(index)
 
 func update_portrait(speaker_id: String, emotion: String = "neutral") -> void:
 	var path := PortraitManager.get_portrait_path(speaker_id, emotion)

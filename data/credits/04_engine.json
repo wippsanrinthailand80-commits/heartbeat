@@ -1,0 +1,15 @@
+{
+	"section": "Engine & Tools",
+	"entries": [
+		{
+			"role": "Game Engine",
+			"name": "Godot Engine 4.7",
+			"note": "Open source game engine"
+		},
+		{
+			"role": "Platform",
+			"name": "GitHub",
+			"note": "Version control & collaboration"
+		}
+	]
+}

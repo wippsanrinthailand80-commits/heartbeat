@@ -86,6 +86,12 @@ custom_minimum_size = Vector2(320, 60)
 text = "Quit"
 theme_override_font_sizes/font_size = 24
 
+[node name="CreditsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(320, 40)
+text = "Credits"
+theme_override_font_sizes/font_size = 18
+
 [node name="VersionLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 3

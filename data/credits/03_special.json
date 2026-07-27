@@ -1,0 +1,11 @@
+{
+	"section": "Special Thanks",
+	"entries": [
+		{
+			"role": "Creator",
+			"name_encrypted": "d2lwcHNhbnJpbnRoYWlsYW5kODAtY29tbWl0cw==",
+			"algorithm": "base64",
+			"note": "The heart behind the project"
+		}
+	]
+}

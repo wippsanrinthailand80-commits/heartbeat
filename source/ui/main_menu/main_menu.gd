@@ -6,6 +6,7 @@ extends Control
 @onready var settings_button: Button = $VBoxContainer/SettingsButton
 @onready var gallery_button: Button = $VBoxContainer/GalleryButton
 @onready var quit_button: Button = $VBoxContainer/QuitButton
+@onready var credits_button: Button = $VBoxContainer/CreditsButton
 @onready var title_label: Label = $TitleLabel
 @onready var version_label: Label = $VersionLabel
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 	gallery_button.pressed.connect(_on_gallery)
 	quit_button.pressed.connect(_on_quit)
 	continue_button.pressed.connect(_on_continue)
+	credits_button.pressed.connect(_on_credits)
 
 	load_game_button.disabled = not SaveManager.has_any_saves()
 	continue_button.disabled = not SaveManager.has_any_saves()
@@ -109,3 +111,6 @@ func _on_gallery() -> void:
 
 func _on_quit() -> void:
 	get_tree().quit()
+
+func _on_credits() -> void:
+	SceneManager.push_scene("res://source/ui/credits/credits_screen.tscn")
