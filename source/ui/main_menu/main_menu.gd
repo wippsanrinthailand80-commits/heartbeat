@@ -22,6 +22,17 @@ func _ready() -> void:
 
 	version_label.text = "v1.0.0"
 	AudioManager.play_bgm("main_menu")
+	_apply_safe_area()
+
+func _apply_safe_area() -> void:
+	var safe := DisplayServer.get_display_safe_area()
+	var viewport_size := get_viewport().get_visible_rect().size
+	var margin_top := int(safe.position.y)
+	var margin_bottom := int(viewport_size.y - safe.end.y)
+	var title: Label = get_node_or_null("TitleLabel")
+	if title:
+		title.offset_top = max(margin_top + 60, title.offset_top)
+	version_label.offset_bottom = -max(margin_bottom + 10, 30)
 
 func _on_new_game() -> void:
 	GameState.reset_state()

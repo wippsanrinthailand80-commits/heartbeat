@@ -47,6 +47,7 @@ theme_override_font_sizes/font_size = 18
 
 [node name="CloseButton" type="Button" parent="Panel/Margin/VBox"]
 layout_mode = 2
-custom_minimum_size = Vector2(150, 40)
+custom_minimum_size = Vector2(150, 48)
 size_flags_horizontal = 4
 text = "Close"
+theme_override_font_sizes/font_size = 20

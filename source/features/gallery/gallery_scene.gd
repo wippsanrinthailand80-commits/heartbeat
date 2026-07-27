@@ -6,11 +6,22 @@ extends Control
 @onready var preview_panel: PanelContainer = $PreviewPanel
 @onready var preview_texture: TextureRect = $PreviewPanel/TextureRect
 @onready var cg_title_label: Label = $PreviewPanel/TitleLabel
+@onready var preview_close_button: Button = $PreviewPanel/CloseButton
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_pressed)
+	preview_close_button.pressed.connect(_on_preview_close)
 	preview_panel.visible = false
 	_populate_gallery()
+
+func _input(event: InputEvent) -> void:
+	if preview_panel.visible and event is InputEventScreenTouch and event.pressed:
+		if not preview_panel.get_global_rect().has_point(event.position):
+			_on_preview_close()
+			get_viewport().set_input_as_handled()
+
+func _on_preview_close() -> void:
+	preview_panel.visible = false
 
 func _populate_gallery() -> void:
 	for child in grid_container.get_children():

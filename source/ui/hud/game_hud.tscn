@@ -15,9 +15,9 @@ script = ExtResource("1_game_hud")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 40.0
+offset_bottom = 52.0
 grow_horizontal = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 
 [node name="DayLabel" type="Label" parent="TopBar"]
 layout_mode = 2
@@ -36,25 +36,30 @@ theme_override_constants/separation = 15
 
 [node name="MenuButton" type="Button" parent="TopBar"]
 layout_mode = 2
-custom_minimum_size = Vector2(60, 30)
+custom_minimum_size = Vector2(80, 48)
 text = "Menu"
+theme_override_font_sizes/font_size = 18
 
 [node name="AutoButton" type="Button" parent="TopBar"]
 layout_mode = 2
-custom_minimum_size = Vector2(60, 30)
+custom_minimum_size = Vector2(80, 48)
 text = "Auto"
+theme_override_font_sizes/font_size = 18
 
 [node name="SkipButton" type="Button" parent="TopBar"]
 layout_mode = 2
-custom_minimum_size = Vector2(60, 30)
+custom_minimum_size = Vector2(80, 48)
 text = "Skip"
+theme_override_font_sizes/font_size = 18
 
 [node name="SaveButton" type="Button" parent="TopBar"]
 layout_mode = 2
-custom_minimum_size = Vector2(60, 30)
+custom_minimum_size = Vector2(80, 48)
 text = "Save"
+theme_override_font_sizes/font_size = 18
 
 [node name="LoadButton" type="Button" parent="TopBar"]
 layout_mode = 2
-custom_minimum_size = Vector2(60, 30)
+custom_minimum_size = Vector2(80, 48)
 text = "Load"
+theme_override_font_sizes/font_size = 18

@@ -120,7 +120,9 @@ func _on_choices_presented(choices: Array) -> void:
 		var choice: Dictionary = choices[i]
 		var button := Button.new()
 		button.text = choice.get("text", "Choice %d" % (i + 1))
-		button.custom_minimum_size = Vector2(600, 50)
+		button.custom_minimum_size = Vector2(600, 80)
+		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		button.mouse_filter = Control.MOUSE_FILTER_STOP
 		button.pressed.connect(_on_choice_button_pressed.bind(i))
 		choice_container.add_child(button)
 

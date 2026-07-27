@@ -10,8 +10,28 @@ var current_background_path: String = ""
 var character_nodes: Dictionary = {}
 
 func _ready() -> void:
+	_apply_safe_area()
 	_connect_signals()
 	_load_intro()
+
+func _apply_safe_area() -> void:
+	var safe := DisplayServer.get_display_safe_area()
+	var viewport_size := get_viewport().get_visible_rect().size
+	var margin_left := int(safe.position.x)
+	var margin_top := int(safe.position.y)
+	var margin_right := int(viewport_size.x - safe.end.x)
+	var margin_bottom := int(viewport_size.y - safe.end.y)
+
+	if dialogue_box and dialogue_box.has_node("DialoguePanel"):
+		var dp: Control = dialogue_box.get_node("DialoguePanel")
+		dp.offset_left = max(margin_left + 40, dp.offset_left)
+		dp.offset_right = -max(margin_right + 40, abs(dp.offset_right))
+
+	if game_hud and game_hud.has_node("TopBar"):
+		var tb: Control = game_hud.get_node("TopBar")
+		tb.offset_left = max(margin_left + 10, 0)
+		tb.offset_right = -max(margin_right + 10, 0)
+		tb.offset_bottom = max(margin_top + 52, 52)
 
 func _connect_signals() -> void:
 	EventBus.line_displayed.connect(_on_line_displayed)

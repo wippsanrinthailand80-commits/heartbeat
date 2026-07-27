@@ -4,7 +4,7 @@ var is_save_mode: bool = true
 var selected_slot: int = -1
 
 @onready var title_label: Label = $Panel/TitleLabel
-@onready var slot_container: VBoxContainer = $Panel/Margin/SlotContainer
+@onready var slot_container: VBoxContainer = $Panel/Margin/SlotScroll/SlotContainer
 @onready var save_button: Button = $Panel/Margin/HBox/SaveButton
 @onready var load_button: Button = $Panel/Margin/HBox/LoadButton
 @onready var delete_button: Button = $Panel/Margin/HBox/DeleteButton
@@ -21,7 +21,7 @@ func _ready() -> void:
 func _create_save_slots() -> void:
 	for i in range(SaveManager.MAX_SAVE_SLOTS):
 		var button := Button.new()
-		button.custom_minimum_size = Vector2(800, 60)
+		button.custom_minimum_size = Vector2(800, 56)
 		button.text = "Slot %d - Empty" % (i + 1)
 		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		button.pressed.connect(_on_slot_pressed.bind(i))
