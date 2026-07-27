@@ -89,7 +89,7 @@ theme_override_font_sizes/font_size = 24
 
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-custom_minimum_size = Vector2(320, 40)
+custom_minimum_size = Vector2(320, 60)
 text = "Credits"
 theme_override_font_sizes/font_size = 18
 

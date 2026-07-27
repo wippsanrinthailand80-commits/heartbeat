@@ -11,8 +11,14 @@ func _ready() -> void:
 	close_button.pressed.connect(_on_close)
 	_load_credits()
 
+func _input(event: InputEvent) -> void:
+	if visible and event.is_action_pressed("ui_cancel"):
+		_on_close()
+		get_viewport().set_input_as_handled()
+
 func _on_close() -> void:
 	visible = false
+	SceneManager.pop_scene()
 
 func _load_credits() -> void:
 	for child in content.get_children():

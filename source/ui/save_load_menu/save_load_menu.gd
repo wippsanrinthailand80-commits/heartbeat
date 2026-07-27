@@ -18,6 +18,11 @@ func _ready() -> void:
 	_connect_signals()
 	_update_ui()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		SceneManager.pop_scene()
+		get_viewport().set_input_as_handled()
+
 func _create_save_slots() -> void:
 	for i in range(SaveManager.MAX_SAVE_SLOTS):
 		var button := Button.new()

@@ -11,7 +11,7 @@ func _ready() -> void:
 	color_rect = ColorRect.new()
 	color_rect.color = Color(0, 0, 0, 1)
 	color_rect.visible = false
-	color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	color_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	color_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	color_rect.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	color_rect.grow_vertical = Control.GROW_DIRECTION_BOTH
@@ -66,7 +66,9 @@ func dissolve_transition(duration: float = 1.0) -> void:
 
 func instant_black() -> void:
 	color_rect.visible = true
+	color_rect.mouse_filter = Control.MOUSE_FILTER_STOP
 	color_rect.color = Color(0, 0, 0, 1)
 
 func instant_clear() -> void:
 	color_rect.visible = false
+	color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE

@@ -25,6 +25,11 @@ func _ready() -> void:
 	_connect_signals()
 	back_button.pressed.connect(_on_back)
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		_on_back()
+		get_viewport().set_input_as_handled()
+
 func _connect_signals() -> void:
 	bgm_slider.value_changed.connect(_on_bgm_changed)
 	sfx_slider.value_changed.connect(_on_sfx_changed)

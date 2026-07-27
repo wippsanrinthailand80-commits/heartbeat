@@ -19,6 +19,12 @@ func _input(event: InputEvent) -> void:
 		if not preview_panel.get_global_rect().has_point(event.position):
 			_on_preview_close()
 			get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_cancel"):
+		if preview_panel.visible:
+			_on_preview_close()
+		else:
+			SceneManager.pop_scene()
+		get_viewport().set_input_as_handled()
 
 func _on_preview_close() -> void:
 	preview_panel.visible = false

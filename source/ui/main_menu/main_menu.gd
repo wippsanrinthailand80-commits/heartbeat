@@ -70,7 +70,12 @@ func _setup_cheat_input() -> void:
 	cheat_status.offset_bottom = 130
 
 func _on_title_tapped(event: InputEvent) -> void:
+	var is_press := false
 	if event is InputEventMouseButton and event.pressed:
+		is_press = true
+	elif event is InputEventScreenTouch and event.pressed:
+		is_press = true
+	if is_press:
 		cheat_input.visible = not cheat_input.visible
 		cheat_status.visible = false
 		if cheat_input.visible:

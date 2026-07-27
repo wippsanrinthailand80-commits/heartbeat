@@ -87,7 +87,12 @@ func _on_dialogue_panel_input(event: InputEvent) -> void:
 		return
 	if not DialogueManager.is_dialogue_active:
 		return
+	var is_press := false
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		is_press = true
+	elif event is InputEventScreenTouch and event.pressed:
+		is_press = true
+	if is_press:
 		if is_typing:
 			_complete_text_immediately()
 		elif is_text_complete:
