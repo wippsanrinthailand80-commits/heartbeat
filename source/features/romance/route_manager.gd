@@ -2,12 +2,42 @@ extends Node
 
 var current_route: String = ""
 var route_history: Array = []
+var endings_config: Dictionary = {}
+
+const ENDINGS_PATH := "res://data/endings.json"
 
 signal route_started(character_id: String)
 signal route_ended(character_id: String, ending_id: String)
 
 func _ready() -> void:
 	EventBus.route_locked.connect(_on_route_locked)
+	_load_endings_config()
+
+func _load_endings_config() -> void:
+	var file := FileAccess.open(ENDINGS_PATH, FileAccess.READ)
+	if file == null:
+		push_warning("RouteManager: No endings config found")
+		return
+	var json := JSON.new()
+	if json.parse(file.get_as_text()) != OK:
+		push_warning("RouteManager: Failed to parse endings config")
+		return
+	endings_config = json.data
+
+func get_total_endings() -> int:
+	return endings_config.get("total_endings", 0)
+
+func get_ending_type_count(type: String) -> int:
+	return endings_config.get(type + "_endings", 0)
+
+func get_character_ending_count(character_id: String, ending_type: String = "") -> int:
+	var chars: Dictionary = endings_config.get("characters", {})
+	if not chars.has(character_id):
+		return 0
+	var endings: Dictionary = chars[character_id].get("endings", {})
+	if ending_type.is_empty():
+		return endings.values().reduce(func(a, b): return a + b, 0)
+	return endings.get(ending_type, 0)
 
 func lock_route(character_id: String) -> void:
 	if current_route == character_id:
@@ -33,10 +63,12 @@ func is_route_started(character_id: String) -> bool:
 	return character_id in route_history
 
 func is_route_completed(character_id: String) -> bool:
-	return (character_id + "_best_ending") in GameState.unlocked_endings \
-		or (character_id + "_good_ending") in GameState.unlocked_endings \
-		or (character_id + "_normal_ending") in GameState.unlocked_endings \
-		or (character_id + "_bad_ending") in GameState.unlocked_endings
+	var char_endings: Dictionary = endings_config.get("ending_ids", {}).get(character_id, {})
+	for type in char_endings:
+		for ending_id in char_endings[type]:
+			if ending_id in GameState.unlocked_endings:
+				return true
+	return false
 
 func get_completed_routes() -> Array:
 	return GameState.unlocked_routes.duplicate()
@@ -54,19 +86,53 @@ func determine_ending(character_id: String) -> String:
 	var affection := AffectionManager.get_affection(character_id)
 	var trust := AffectionManager.get_axis(character_id, "trust")
 	var respect := AffectionManager.get_axis(character_id, "respect")
+	var attraction := AffectionManager.get_axis(character_id, "attraction")
+	var comfort := AffectionManager.get_axis(character_id, "comfort")
+
+	var char_config: Dictionary = endings_config.get("characters", {}).get(character_id, {})
+	var ending_ids: Dictionary = endings_config.get("ending_ids", {}).get(character_id, {})
 
 	if affection >= 90.0 and trust >= 80.0 and respect >= 70.0:
-		return character_id + "_best_ending"
+		var good_ids: Array = ending_ids.get("good", [])
+		if good_ids.size() > 0:
+			return good_ids[0]
 	elif affection >= 75.0 and trust >= 60.0:
-		return character_id + "_good_ending"
-	elif affection >= 50.0:
-		return character_id + "_normal_ending"
-	else:
-		return character_id + "_bad_ending"
+		var good_ids: Array = ending_ids.get("good", [])
+		if good_ids.size() > 0:
+			return good_ids[0]
+
+	var bad_ids: Array = ending_ids.get("bad", [])
+	if bad_ids.size() > 0:
+		return bad_ids[randi() % bad_ids.size()]
+
+	return character_id + "_bad_ending"
+
+func check_secret_ending() -> bool:
+	var secret_ids: Dictionary = endings_config.get("ending_ids", {}).get("secret", {})
+	var secret_ending_ids: Array = secret_ids.get("secret", [])
+
+	for ending_id in secret_ending_ids:
+		if GameState.get_flag("secret_route_active", false):
+			var all_max := true
+			for char_id in AffectionManager.characters:
+				if AffectionManager.get_affection(char_id) < 80.0:
+					all_max = false
+					break
+			if all_max:
+				return true
+	return false
 
 func complete_route(character_id: String, ending_id: String = "") -> void:
 	if ending_id.is_empty():
-		ending_id = determine_ending(character_id)
+		if check_secret_ending():
+			var secret_ids: Dictionary = endings_config.get("ending_ids", {}).get("secret", {})
+			var secret_ending_ids: Array = secret_ids.get("secret", [])
+			if secret_ending_ids.size() > 0:
+				ending_id = secret_ending_ids[0]
+			else:
+				ending_id = "true_ending"
+		else:
+			ending_id = determine_ending(character_id)
 
 	GameState.unlock_ending(ending_id)
 	GameState.set_flag(character_id + "_ending", ending_id)
@@ -76,16 +142,24 @@ func complete_route(character_id: String, ending_id: String = "") -> void:
 
 func get_all_route_endings(character_id: String) -> Array:
 	var endings: Array = []
-	var possible := [
-		character_id + "_best_ending",
-		character_id + "_good_ending",
-		character_id + "_normal_ending",
-		character_id + "_bad_ending",
-	]
-	for ending in possible:
-		if ending in GameState.unlocked_endings:
-			endings.append(ending)
+	var ending_ids: Dictionary = endings_config.get("ending_ids", {}).get(character_id, {})
+	for type in ending_ids:
+		for ending_id in ending_ids[type]:
+			if ending_id in GameState.unlocked_endings:
+				endings.append(ending_id)
 	return endings
+
+func get_unlocked_ending_count() -> int:
+	return GameState.unlocked_endings.size()
+
+func get_ending_progress() -> Dictionary:
+	var unlocked := GameState.unlocked_endings.size()
+	var total := get_total_endings()
+	return {
+		"unlocked": unlocked,
+		"total": total,
+		"percentage": (float(unlocked) / float(total)) * 100.0 if total > 0 else 0.0,
+	}
 
 func get_available_routes() -> Array:
 	var available: Array = ["common"]

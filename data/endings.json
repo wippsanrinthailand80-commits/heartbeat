@@ -1,0 +1,71 @@
+{
+	"total_endings": 69,
+	"good_endings": 2,
+	"secret_endings": 1,
+	"bad_endings": 66,
+	"characters": {
+		"alice": {
+			"endings": {
+				"good": 1,
+				"bad": 0,
+				"secret": 0
+			}
+		},
+		"bob": {
+			"endings": {
+				"good": 1,
+				"bad": 0,
+				"secret": 0
+			}
+		},
+		"diana": {
+			"endings": {
+				"good": 0,
+				"bad": 0,
+				"secret": 0
+			}
+		},
+		"edward": {
+			"endings": {
+				"good": 0,
+				"bad": 0,
+				"secret": 0
+			}
+		},
+		"secret": {
+			"endings": {
+				"good": 0,
+				"bad": 0,
+				"secret": 1
+			}
+		}
+	},
+	"ending_ids": {
+		"alice": {
+			"good": ["alice_good_1"],
+			"bad": [],
+			"secret": []
+		},
+		"bob": {
+			"good": ["bob_good_1"],
+			"bad": [],
+			"secret": []
+		},
+		"diana": {
+			"good": [],
+			"bad": [],
+			"secret": []
+		},
+		"edward": {
+			"good": [],
+			"bad": [],
+			"secret": []
+		},
+		"secret": {
+			"good": [],
+			"bad": [],
+			"secret": ["true_ending"]
+		}
+	},
+	"_note": "Cousin: fill in bad ending IDs and adjust counts per character. Total bad must equal 66. Alice and Bob each have 1 good. Secret ending is 'true_ending'."
+}

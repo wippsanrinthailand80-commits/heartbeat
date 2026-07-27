@@ -84,6 +84,13 @@ func _populate() -> void:
 		for ending in GameState.unlocked_endings:
 			_add_row(ending)
 
+	var progress: Dictionary = RouteManager.get_ending_progress()
+	if progress.get("total", 0) > 0:
+		_add_separator()
+		_add_header("Ending Progress")
+		_add_row("Unlocked", "%d / %d" % [progress.get("unlocked", 0), progress.get("total", 0)])
+		_add_progress_bar(progress.get("percentage", 0.0) / 100.0)
+
 func _add_header(text: String) -> void:
 	var label := Label.new()
 	label.text = text
