@@ -3,13 +3,19 @@ extends CanvasLayer
 signal transition_completed
 
 var is_transitioning: bool = false
-
-@onready var color_rect: ColorRect = $ColorRect
-@onready var anim_player: AnimationPlayer = $AnimationPlayer
+var color_rect: ColorRect
 
 func _ready() -> void:
 	layer = 100
+
+	color_rect = ColorRect.new()
+	color_rect.color = Color(0, 0, 0, 1)
 	color_rect.visible = false
+	color_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	color_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+	color_rect.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	color_rect.grow_vertical = Control.GROW_DIRECTION_BOTH
+	add_child(color_rect)
 
 func fade_to_black(duration: float = 0.5) -> void:
 	if is_transitioning:
