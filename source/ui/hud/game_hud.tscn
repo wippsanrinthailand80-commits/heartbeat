@@ -63,3 +63,9 @@ layout_mode = 2
 custom_minimum_size = Vector2(80, 48)
 text = "Load"
 theme_override_font_sizes/font_size = 18
+
+[node name="StatusButton" type="Button" parent="TopBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(80, 48)
+text = "Info"
+theme_override_font_sizes/font_size = 18

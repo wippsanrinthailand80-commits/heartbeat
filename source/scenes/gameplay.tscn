@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://gameplay_scene"]
+[gd_scene load_steps=7 format=3 uid="uid://gameplay_scene"]
 
 [ext_resource type="Script" path="res://source/scenes/gameplay.gd" id="1_gameplay"]
 [ext_resource type="PackedScene" uid="uid://dialogue_box" path="res://source/ui/dialogue_ui/dialogue_box.tscn" id="2_dialogue_box"]
 [ext_resource type="PackedScene" uid="uid://game_hud" path="res://source/ui/hud/game_hud.tscn" id="3_game_hud"]
 [ext_resource type="PackedScene" uid="uid://pause_menu" path="res://source/ui/common/pause_menu.tscn" id="4_pause_menu"]
 [ext_resource type="PackedScene" uid="uid://backlog" path="res://source/ui/dialogue_ui/backlog.tscn" id="5_backlog"]
+[ext_resource type="PackedScene" uid="uid://status_screen" path="res://source/ui/status/status_screen.tscn" id="6_status"]
 
 [node name="Gameplay" type="Control"]
 layout_mode = 3
@@ -44,3 +45,6 @@ color = Color(0.1, 0.1, 0.15, 1)
 [node name="PauseMenu" parent="UILayer" instance=ExtResource("4_pause_menu")]
 
 [node name="Backlog" parent="UILayer" instance=ExtResource("5_backlog")]
+
+[node name="StatusScreen" parent="UILayer" instance=ExtResource("6_status")]
+visible = false

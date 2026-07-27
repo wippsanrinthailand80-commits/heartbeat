@@ -5,6 +5,7 @@ extends Control
 @onready var game_hud: Control = $UILayer/GameHUD
 @onready var pause_menu: Control = $UILayer/PauseMenu
 @onready var backlog: Control = $UILayer/Backlog
+@onready var status_screen: Control = $UILayer/StatusScreen
 
 var current_background_path: String = ""
 var character_nodes: Dictionary = {}
@@ -12,6 +13,7 @@ var character_nodes: Dictionary = {}
 func _ready() -> void:
 	_apply_safe_area()
 	_connect_signals()
+	status_screen.add_to_group("status_screen")
 	_load_intro()
 
 func _apply_safe_area() -> void:

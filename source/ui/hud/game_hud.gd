@@ -8,6 +8,7 @@ extends Control
 @onready var skip_button: Button = $TopBar/SkipButton
 @onready var save_button: Button = $TopBar/SaveButton
 @onready var load_button: Button = $TopBar/LoadButton
+@onready var status_button: Button = $TopBar/StatusButton
 
 func _ready() -> void:
 	menu_button.pressed.connect(_on_menu_pressed)
@@ -15,6 +16,7 @@ func _ready() -> void:
 	skip_button.pressed.connect(_on_skip_pressed)
 	save_button.pressed.connect(_on_save_pressed)
 	load_button.pressed.connect(_on_load_pressed)
+	status_button.pressed.connect(_on_status_pressed)
 
 	EventBus.time_advanced.connect(_on_time_advanced)
 	EventBus.auto_mode_toggled.connect(_on_auto_toggled)
@@ -69,6 +71,11 @@ func _on_save_pressed() -> void:
 
 func _on_load_pressed() -> void:
 	SceneManager.push_scene("res://source/ui/save_load_menu/save_load_menu.tscn")
+
+func _on_status_pressed() -> void:
+	var status_screen := get_tree().get_first_node_in_group("status_screen")
+	if status_screen:
+		status_screen._on_open()
 
 func _toggle_pause_menu() -> void:
 	var pause_menu := get_tree().get_first_node_in_group("pause_menu")

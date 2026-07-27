@@ -25,6 +25,7 @@ GalleryManager="*res://source/features/gallery/gallery_manager.gd"
 MinigameManager="*res://source/features/minigames/minigame_manager.gd"
 RouteManager="*res://source/features/romance/route_manager.gd"
 TimeManager="*res://source/features/time/time_manager.gd"
+CheatManager="*res://source/autoload/cheat_manager.gd"
 
 [display]
 
