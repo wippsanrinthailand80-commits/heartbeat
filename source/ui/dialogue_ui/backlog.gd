@@ -33,7 +33,7 @@ func _refresh_backlog() -> void:
 		backlog_list.add_item(display_text)
 
 	if backlog_list.item_count > 0:
-		backlog_list.ensure_item_visible(backlog_list.item_count - 1)
+		backlog_list.scroll_to_item(backlog_list.item_count - 1)
 
 func _on_close_pressed() -> void:
 	visible = false
