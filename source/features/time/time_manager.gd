@@ -10,15 +10,15 @@ const TIME_PERIODS := ["morning", "afternoon", "evening", "night"]
 func _ready() -> void:
 	EventBus.time_advanced.connect(_on_time_advanced)
 
-func register_schedule(day: int, time: String, events: Array[Dictionary]) -> void:
+func register_schedule(day: int, time: String, events: Array) -> void:
 	var key := "%d_%s" % [day, time]
 	schedule_data[key] = events
 
-func get_events(day: int, time: String) -> Array[Dictionary]:
+func get_events(day: int, time: String) -> Array:
 	var key := "%d_%s" % [day, time]
 	return schedule_data.get(key, [])
 
-func get_current_events() -> Array[Dictionary]:
+func get_current_events() -> Array:
 	return get_events(GameState.current_day, GameState.current_time_of_day)
 
 func is_time_available(target_time: String) -> bool:

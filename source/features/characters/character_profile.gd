@@ -18,8 +18,8 @@ func get_portrait_path(emotion: String = "neutral") -> String:
 		return portraits[default_emotion]
 	return "res://assets/art/characters/placeholder.png"
 
-func get_all_emotions() -> Array[String]:
-	var emotions: Array[String] = []
+func get_all_emotions() -> Array:
+	var emotions: Array = []
 	for key in portraits:
 		emotions.append(key)
 	return emotions

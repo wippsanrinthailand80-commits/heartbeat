@@ -31,8 +31,8 @@ func end_minigame(result: Dictionary = {}) -> void:
 func is_minigame_active() -> bool:
 	return not active_minigame.is_empty()
 
-func get_available_minigames() -> Array[Dictionary]:
-	var available: Array[Dictionary] = []
+func get_available_minigames() -> Array:
+	var available: Array = []
 	for id in minigame_registry:
 		available.append(minigame_registry[id])
 	return available

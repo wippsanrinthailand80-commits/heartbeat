@@ -26,15 +26,15 @@ func get_next_line(current_id: String) -> DialogueLine:
 
 	return get_line(next_id)
 
-func get_choices(current_id: String) -> Array[Dictionary]:
+func get_choices(current_id: String) -> Array:
 	var current: DialogueLine = get_line(current_id)
 	if current == null:
 		return []
 	return current.choices
 
-func evaluate_choices(current_id: String) -> Array[Dictionary]:
-	var all_choices: Array[Dictionary] = get_choices(current_id)
-	var valid_choices: Array[Dictionary] = []
+func evaluate_choices(current_id: String) -> Array:
+	var all_choices: Array = get_choices(current_id)
+	var valid_choices: Array = []
 
 	for choice in all_choices:
 		var conditions: Array = choice.get("conditions", [])

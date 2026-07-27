@@ -1,7 +1,7 @@
 extends Node
 
 var current_scene_path: String = ""
-var scene_stack: Array[String] = []
+var scene_stack: Array = []
 
 func _ready() -> void:
 	pass
@@ -53,5 +53,5 @@ func pop_scene() -> void:
 func get_current_scene() -> String:
 	return current_scene_path
 
-func get_scene_stack() -> Array[String]:
+func get_scene_stack() -> Array:
 	return scene_stack.duplicate()

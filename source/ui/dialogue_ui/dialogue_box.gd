@@ -107,7 +107,7 @@ func _complete_text_immediately() -> void:
 	is_typing = false
 	continue_indicator.visible = true
 
-func _on_choices_presented(choices: Array[Dictionary]) -> void:
+func _on_choices_presented(choices: Array) -> void:
 	choice_container.visible = true
 
 	for child in choice_container.get_children():

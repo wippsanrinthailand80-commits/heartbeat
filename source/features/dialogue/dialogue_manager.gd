@@ -4,7 +4,7 @@ var current_tree: DialogueTree = null
 var current_line_id: String = ""
 var is_dialogue_active: bool = false
 var is_waiting_for_input: bool = false
-var history: Array[Dictionary] = []
+var history: Array = []
 
 var auto_mode: bool = false
 var skip_mode: bool = false
@@ -132,7 +132,7 @@ func _display_current_line() -> void:
 	EventBus.line_displayed.emit(speaker_name, line.text, line.emotion)
 
 	if line.has_choices():
-		var valid_choices: Array[Dictionary] = current_tree.evaluate_choices(current_line_id)
+		var valid_choices: Array = current_tree.evaluate_choices(current_line_id)
 		EventBus.choices_presented.emit(valid_choices)
 		is_waiting_for_input = false
 	elif line.auto_advance or auto_mode:
@@ -148,7 +148,7 @@ func make_choice(choice_index: int) -> void:
 	if current_tree == null:
 		return
 
-	var valid_choices: Array[Dictionary] = current_tree.evaluate_choices(current_line_id)
+	var valid_choices: Array = current_tree.evaluate_choices(current_line_id)
 	if choice_index < 0 or choice_index >= valid_choices.size():
 		push_error("DialogueManager: Invalid choice index %d" % choice_index)
 		return
@@ -242,7 +242,7 @@ func _save_state_to_history(line: DialogueLine) -> void:
 		"time": GameState.current_time_of_day,
 	})
 
-func get_backlog() -> Array[Dictionary]:
+func get_backlog() -> Array:
 	return GameState.backlog.duplicate(true)
 
 func rollback() -> void:

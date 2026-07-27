@@ -16,7 +16,7 @@ func _populate_gallery() -> void:
 	for child in grid_container.get_children():
 		child.queue_free()
 
-	var all_cgs: Array[Dictionary] = GalleryManager.get_all_cgs()
+	var all_cgs: Array = GalleryManager.get_all_cgs()
 
 	if all_cgs.is_empty():
 		var label := Label.new()

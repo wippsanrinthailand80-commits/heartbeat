@@ -95,8 +95,8 @@ func get_save_info(slot: int) -> Dictionary:
 		"play_time": data.get("play_time", 0.0),
 	}
 
-func get_all_save_info() -> Array[Dictionary]:
-	var saves: Array[Dictionary] = []
+func get_all_save_info() -> Array:
+	var saves: Array = []
 	for i in range(MAX_SAVE_SLOTS):
 		saves.append(get_save_info(i))
 	return saves

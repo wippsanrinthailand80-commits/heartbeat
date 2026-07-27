@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 
 func _refresh_backlog() -> void:
 	backlog_list.clear()
-	var entries: Array[Dictionary] = GameState.backlog
+	var entries: Array = GameState.backlog
 
 	for entry in entries:
 		var speaker: String = entry.get("speaker", "")

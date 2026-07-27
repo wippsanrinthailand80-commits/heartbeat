@@ -1,7 +1,7 @@
 extends Node
 
 var current_route: String = ""
-var route_history: Array[String] = []
+var route_history: Array = []
 
 signal route_started(character_id: String)
 signal route_ended(character_id: String, ending_id: String)
@@ -38,7 +38,7 @@ func is_route_completed(character_id: String) -> bool:
 		or (character_id + "_normal_ending") in GameState.unlocked_endings \
 		or (character_id + "_bad_ending") in GameState.unlocked_endings
 
-func get_completed_routes() -> Array[String]:
+func get_completed_routes() -> Array:
 	return GameState.unlocked_routes.duplicate()
 
 func get_route_progress(character_id: String) -> float:
@@ -74,8 +74,8 @@ func complete_route(character_id: String, ending_id: String = "") -> void:
 	route_ended.emit(character_id, ending_id)
 	current_route = ""
 
-func get_all_route_endings(character_id: String) -> Array[String]:
-	var endings: Array[String] = []
+func get_all_route_endings(character_id: String) -> Array:
+	var endings: Array = []
 	var possible := [
 		character_id + "_best_ending",
 		character_id + "_good_ending",
@@ -87,8 +87,8 @@ func get_all_route_endings(character_id: String) -> Array[String]:
 			endings.append(ending)
 	return endings
 
-func get_available_routes() -> Array[String]:
-	var available: Array[String] = ["common"]
+func get_available_routes() -> Array:
+	var available: Array = ["common"]
 	for route in GameState.unlocked_routes:
 		available.append(route)
 	return available

@@ -11,10 +11,10 @@ func is_cg_unlocked(cg_id: String) -> bool:
 func unlock_cg(cg_id: String) -> void:
 	GameState.unlock_cg(cg_id)
 
-func get_all_cgs() -> Array[Dictionary]:
+func get_all_cgs() -> Array:
 	return cg_registry.values()
 
-func get_unlocked_cgs() -> Array[String]:
+func get_unlocked_cgs() -> Array:
 	return GameState.unlocked_cgs.duplicate()
 
 func get_cg_count() -> Dictionary:
@@ -48,8 +48,8 @@ func load_cg_registry(path: String) -> void:
 func get_cg_info(cg_id: String) -> Dictionary:
 	return cg_registry.get(cg_id, {})
 
-func get_ending_cg(character_id: String) -> Array[Dictionary]:
-	var results: Array[Dictionary] = []
+func get_ending_cg(character_id: String) -> Array:
+	var results: Array = []
 	for cg_id in cg_registry:
 		if cg_id.begins_with(character_id):
 			results.append(cg_registry[cg_id])

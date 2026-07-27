@@ -3,7 +3,7 @@ extends Node
 signal dialogue_started
 signal dialogue_ended
 signal line_displayed(speaker: String, text: String, emotion: String)
-signal choices_presented(choices: Array[Dictionary])
+signal choices_presented(choices: Array)
 signal choice_made(choice_id: String, choice_index: int)
 
 signal affection_changed(character_id: String, axis: String, old_value: float, new_value: float)
