@@ -4,11 +4,11 @@ var current_chapter: String = "chapter_01"
 var current_scene: String = ""
 var current_line_index: int = 0
 var flags: Dictionary = {}
-var unlocked_routes: Array[String] = []
-var unlocked_endings: Array[String] = []
-var unlocked_cgs: Array[String] = []
-var inventory: Array[Dictionary] = []
-var backlog: Array[Dictionary] = []
+var unlocked_routes: Array = []
+var unlocked_endings: Array = []
+var unlocked_cgs: Array = []
+var inventory: Array = []
+var backlog: Array = []
 var is_new_game: bool = true
 
 var current_day: int = 1
