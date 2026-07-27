@@ -19,6 +19,7 @@ func _ready() -> void:
 	status_button.pressed.connect(_on_status_pressed)
 
 	EventBus.time_advanced.connect(_on_time_advanced)
+	EventBus.affection_changed.connect(_on_affection_changed)
 	EventBus.auto_mode_toggled.connect(_on_auto_toggled)
 	EventBus.skip_mode_toggled.connect(_on_skip_toggled)
 
@@ -50,6 +51,9 @@ func _update_affection_display() -> void:
 
 func _on_time_advanced(_day: int, _time: String) -> void:
 	_update_display()
+
+func _on_affection_changed(_char_id: String, _axis: String, _old: float, _new: float) -> void:
+	_update_affection_display()
 
 func _on_auto_toggled(enabled: bool) -> void:
 	auto_button.modulate = Color.GREEN if enabled else Color.WHITE

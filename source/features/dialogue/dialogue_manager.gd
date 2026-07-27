@@ -10,13 +10,17 @@ var auto_mode: bool = false
 var skip_mode: bool = false
 var auto_timer: Timer
 
-const AUTO_DELAY := 3.0
+const DEFAULT_AUTO_DELAY := 3.0
 
 func _ready() -> void:
 	auto_timer = Timer.new()
 	auto_timer.one_shot = true
 	add_child(auto_timer)
 	auto_timer.timeout.connect(_on_auto_timer_timeout)
+
+func _get_auto_delay() -> float:
+	var settings := SaveManager.load_settings()
+	return settings.get("auto_speed", DEFAULT_AUTO_DELAY)
 
 func start_dialogue(tree: DialogueTree) -> void:
 	if tree == null:
@@ -122,14 +126,16 @@ func _display_current_line() -> void:
 		AudioManager.play_voice(line.speaker_id, line.voice_line)
 
 	var speaker_name: String = ""
+	var speaker_id: String = ""
 	if not line.is_narrator and not line.speaker_id.is_empty():
+		speaker_id = line.speaker_id
 		speaker_name = AffectionManager.get_character_display_name(line.speaker_id)
 
 	GameState.add_to_backlog(speaker_name, line.text, line.emotion)
 
 	_save_state_to_history(line)
 
-	EventBus.line_displayed.emit(speaker_name, line.text, line.emotion)
+	EventBus.line_displayed.emit(speaker_id, speaker_name, line.text, line.emotion)
 
 	if line.has_choices():
 		var valid_choices: Array = current_tree.evaluate_choices(current_line_id)
@@ -141,8 +147,6 @@ func _display_current_line() -> void:
 		_move_to_next()
 	else:
 		is_waiting_for_input = true
-		if auto_mode:
-			_start_auto_timer()
 
 func make_choice(choice_index: int) -> void:
 	if current_tree == null:
@@ -220,7 +224,7 @@ func toggle_skip_mode() -> void:
 		_perform_skip()
 
 func _start_auto_timer() -> void:
-	auto_timer.start(AUTO_DELAY)
+	auto_timer.start(_get_auto_delay())
 
 func _on_auto_timer_timeout() -> void:
 	if auto_mode and is_dialogue_active and is_waiting_for_input:

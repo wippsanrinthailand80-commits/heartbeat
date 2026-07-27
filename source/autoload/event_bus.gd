@@ -2,7 +2,7 @@ extends Node
 
 signal dialogue_started
 signal dialogue_ended
-signal line_displayed(speaker: String, text: String, emotion: String)
+signal line_displayed(speaker_id: String, speaker_name: String, text: String, emotion: String)
 signal choices_presented(choices: Array)
 signal choice_made(choice_id: String, choice_index: int)
 
@@ -32,3 +32,5 @@ signal minigame_started(minigame_id: String)
 signal minigame_ended(minigame_id: String, result: Dictionary)
 
 signal time_advanced(new_day: int, new_time: String)
+signal day_started(day: int)
+signal time_started(day: int, time: String)

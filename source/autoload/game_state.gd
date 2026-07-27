@@ -110,7 +110,9 @@ func advance_time() -> void:
 	else:
 		current_time_of_day = time_order[0]
 		current_day += 1
+		EventBus.day_started.emit(current_day)
 	EventBus.time_advanced.emit(current_day, current_time_of_day)
+	EventBus.time_started.emit(current_day, current_time_of_day)
 
 func get_save_data() -> Dictionary:
 	return {

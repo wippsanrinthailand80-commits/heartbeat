@@ -27,12 +27,18 @@ func is_time_available(target_time: String) -> bool:
 	return target_idx >= current_idx
 
 func advance_to_time(target_time: String) -> void:
-	while GameState.current_time_of_day != target_time:
+	var max_iterations := 20
+	var count := 0
+	while GameState.current_time_of_day != target_time and count < max_iterations:
 		GameState.advance_time()
+		count += 1
 
 func advance_to_day(target_day: int) -> void:
-	while GameState.current_day < target_day:
+	var max_iterations := (target_day - GameState.current_day) * 4 + 10
+	var count := 0
+	while GameState.current_day < target_day and count < max_iterations:
 		GameState.advance_time()
+		count += 1
 
 func get_time_index(time: String) -> int:
 	return TIME_PERIODS.find(time)

@@ -49,7 +49,7 @@ func _on_dialogue_ended() -> void:
 	choice_container.visible = false
 	_choice_lock = false
 
-func _on_line_displayed(speaker: String, text: String, emotion: String) -> void:
+func _on_line_displayed(speaker_id: String, speaker_name: String, text: String, emotion: String) -> void:
 	full_text = text
 	displayed_text = ""
 	current_character_index = 0
@@ -59,12 +59,14 @@ func _on_line_displayed(speaker: String, text: String, emotion: String) -> void:
 	choice_container.visible = false
 	continue_indicator.visible = false
 
-	if speaker.is_empty():
+	if speaker_name.is_empty():
 		speaker_label.text = ""
 		name_panel.visible = false
+		portrait_display.visible = false
 	else:
 		name_panel.visible = true
-		speaker_label.text = speaker
+		speaker_label.text = speaker_name
+		update_portrait(speaker_id, emotion)
 
 	dialogue_label.text = ""
 	text_speed_timer.start()
@@ -79,8 +81,6 @@ func _on_text_speed_timer_timeout() -> void:
 		is_text_complete = true
 		is_typing = false
 		continue_indicator.visible = true
-		if Input.is_action_pressed("dialogue_skip"):
-			DialogueManager.toggle_skip_mode()
 
 func _on_dialogue_panel_input(event: InputEvent) -> void:
 	if choice_container.visible:

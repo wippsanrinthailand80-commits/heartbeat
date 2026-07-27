@@ -14,7 +14,11 @@ func _ready() -> void:
 	_apply_safe_area()
 	_connect_signals()
 	status_screen.add_to_group("status_screen")
-	_load_intro()
+	EventBus.scene_transition_started.connect(_on_scene_transition_started)
+	if GameState.is_new_game:
+		_load_intro()
+	else:
+		_resume_from_save()
 
 func _apply_safe_area() -> void:
 	var safe := DisplayServer.get_display_safe_area()
@@ -39,20 +43,31 @@ func _connect_signals() -> void:
 	EventBus.line_displayed.connect(_on_line_displayed)
 	EventBus.dialogue_ended.connect(_on_dialogue_ended)
 	EventBus.cg_unlocked.connect(_on_cg_unlocked)
+	EventBus.affection_changed.connect(_on_affection_changed)
 
 func _load_intro() -> void:
 	var intro_path := "res://data/dialogues/chapter_01/intro.json"
 	if ResourceLoader.exists(intro_path):
 		DialogueManager.start_dialogue_from_file(intro_path)
 
-func _on_line_displayed(speaker: String, text: String, emotion: String) -> void:
+func _resume_from_save() -> void:
 	pass
+
+func _on_line_displayed(speaker_id: String, _speaker_name: String, _text: String, emotion: String) -> void:
+	if not speaker_id.is_empty():
+		dialogue_box.update_portrait(speaker_id, emotion)
 
 func _on_dialogue_ended() -> void:
 	pass
 
 func _on_cg_unlocked(cg_id: String) -> void:
 	pass
+
+func _on_affection_changed(_char_id: String, _axis: String, _old: float, _new: float) -> void:
+	pass
+
+func _on_scene_transition_started(scene_path: String) -> void:
+	load_scene_background(scene_path)
 
 func load_scene_background(path: String) -> void:
 	if current_background_path == path:

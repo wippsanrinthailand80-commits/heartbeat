@@ -26,6 +26,8 @@ MinigameManager="*res://source/features/minigames/minigame_manager.gd"
 RouteManager="*res://source/features/romance/route_manager.gd"
 TimeManager="*res://source/features/time/time_manager.gd"
 CheatManager="*res://source/autoload/cheat_manager.gd"
+DayNightManager="*res://source/autoload/day_night_manager.gd"
+TouchInputManager="*res://source/autoload/touch_input_manager.gd"
 
 [display]
 

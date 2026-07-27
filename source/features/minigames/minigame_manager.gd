@@ -2,6 +2,7 @@ extends Node
 
 var minigame_registry: Dictionary = {}
 var active_minigame: String = ""
+var return_scene: String = "res://source/scenes/gameplay.tscn"
 
 func register_minigame(id: String, scene_path: String, display_name: String = "") -> void:
 	minigame_registry[id] = {
@@ -16,17 +17,18 @@ func start_minigame(id: String) -> bool:
 		return false
 
 	active_minigame = id
+	return_scene = SceneManager.get_current_scene()
 	EventBus.minigame_started.emit(id)
 
 	var scene_path: String = minigame_registry[id]["scene_path"]
-	get_tree().change_scene_to_file(scene_path)
+	SceneManager.change_scene(scene_path, "instant")
 	return true
 
 func end_minigame(result: Dictionary = {}) -> void:
 	var finished_id := active_minigame
 	active_minigame = ""
 	EventBus.minigame_ended.emit(finished_id, result)
-	get_tree().change_scene_to_file("res://source/scenes/main.tscn")
+	SceneManager.change_scene(return_scene, "instant")
 
 func is_minigame_active() -> bool:
 	return not active_minigame.is_empty()

@@ -49,7 +49,6 @@ func _cheat_max_all_affection() -> void:
 		AffectionManager.modify_affection(char_id, "comfort", 999.0)
 		AffectionManager.modify_affection(char_id, "attraction", 999.0)
 		AffectionManager.modify_affection(char_id, "respect", 999.0)
-	EventBus.settings_changed.emit()
 
 func _cheat_max_inventory() -> void:
 	GameState.add_item("golden_ticket", "Golden Ticket", "A shiny golden ticket")
@@ -57,12 +56,15 @@ func _cheat_max_inventory() -> void:
 	GameState.add_item("chocolate", "Chocolate", "Premium chocolate box")
 	GameState.add_item("photo", "Photo", "A developed photograph")
 	GameState.add_item("music_box", "Music Box", "A small music box")
-	EventBus.settings_changed.emit()
+	EventBus.backlog_updated.emit()
 
 func _cheat_advance_day() -> void:
+	var start_day := GameState.current_day
 	GameState.advance_time()
-	GameState.advance_time()
-	GameState.advance_time()
+	while GameState.current_time_of_day != "morning":
+		GameState.advance_time()
+	if GameState.current_day == start_day:
+		GameState.advance_time()
 
 func _cheat_unlock_all() -> void:
 	for char_id in ["alice", "bob", "diana", "edward"]:

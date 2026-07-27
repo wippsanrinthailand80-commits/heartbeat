@@ -15,11 +15,20 @@ func _ready() -> void:
 	_populate_gallery()
 
 func _input(event: InputEvent) -> void:
-	if preview_panel.visible and event is InputEventScreenTouch and event.pressed:
-		if not preview_panel.get_global_rect().has_point(event.position):
+	if preview_panel.visible:
+		var is_close_press := false
+		if event is InputEventScreenTouch and event.pressed:
+			if not preview_panel.get_global_rect().has_point(event.position):
+				is_close_press = true
+		elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			if not preview_panel.get_global_rect().has_point(event.position):
+				is_close_press = true
+		if is_close_press:
 			_on_preview_close()
 			get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("ui_cancel"):
+			return
+
+	if event.is_action_pressed("ui_cancel"):
 		if preview_panel.visible:
 			_on_preview_close()
 		else:

@@ -44,7 +44,7 @@ func _load_credits() -> void:
 	files.sort()
 
 	for fname in files:
-		var path := CREDITS_DIR + file_name
+		var path := CREDITS_DIR + fname
 		var file := FileAccess.open(path, FileAccess.READ)
 		if file == null:
 			continue
