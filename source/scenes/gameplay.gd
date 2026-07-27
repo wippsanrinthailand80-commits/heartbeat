@@ -5,21 +5,13 @@ extends Control
 @onready var game_hud: Control = $UILayer/GameHUD
 @onready var pause_menu: Control = $UILayer/PauseMenu
 @onready var backlog: Control = $UILayer/Backlog
-@onready var dialogue_manager_node: Node = $DialogueManager
 
 var current_background_path: String = ""
 var character_nodes: Dictionary = {}
 
 func _ready() -> void:
-	_init_dialogue_manager()
 	_connect_signals()
 	_load_intro()
-
-func _init_dialogue_manager() -> void:
-	if not has_node("/root/DialogueManager"):
-		var dm_script := load("res://source/features/dialogue/dialogue_manager.gd")
-		dialogue_manager_node.set_script(dm_script)
-		dialogue_manager_node.name = "DialogueManager"
 
 func _connect_signals() -> void:
 	EventBus.line_displayed.connect(_on_line_displayed)

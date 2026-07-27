@@ -20,7 +20,6 @@ const BASE_TEXT_SPEED := 0.03
 
 func _ready() -> void:
 	visible = false
-	DialogueManager = get_node_or_null("/root/DialogueManager")
 	EventBus.line_displayed.connect(_on_line_displayed)
 	EventBus.choices_presented.connect(_on_choices_presented)
 	EventBus.dialogue_ended.connect(_on_dialogue_ended)

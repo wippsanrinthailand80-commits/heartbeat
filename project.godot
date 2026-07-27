@@ -20,6 +20,12 @@ SaveManager="*res://source/autoload/save_manager.gd"
 AudioManager="*res://source/autoload/audio_manager.gd"
 TransitionManager="*res://source/autoload/transition_manager/transition_manager.gd"
 SceneManager="*res://source/autoload/scene_manager.gd"
+DialogueManager="*res://source/features/dialogue/dialogue_manager.gd"
+PortraitManager="*res://source/features/characters/portrait_manager.gd"
+GalleryManager="*res://source/features/gallery/gallery_manager.gd"
+MinigameManager="*res://source/features/minigames/minigame_manager.gd"
+RouteManager="*res://source/features/romance/route_manager.gd"
+TimeManager="*res://source/features/time/time_manager.gd"
 
 [display]
 

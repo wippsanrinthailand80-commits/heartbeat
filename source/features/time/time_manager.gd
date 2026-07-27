@@ -57,8 +57,8 @@ func load_schedule_from_file(path: String) -> void:
 			for time_key in times:
 				register_schedule(day_num, time_key, times[time_key])
 
-func _on_time_advanced(new_day: int, new_time: String) -> void:
-	var events := get_current_events(new_day, new_time)
+func _on_time_advanced(_new_day: int, _new_time: String) -> void:
+	var events := get_current_events()
 	for event in events:
 		var event_type: String = event.get("type", "")
 		match event_type:

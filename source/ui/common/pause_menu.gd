@@ -37,9 +37,7 @@ func _on_save() -> void:
 func _on_load() -> void:
 	visible = false
 	get_tree().paused = false
-	var save_load := preload("res://source/ui/save_load_menu/save_load_menu.tscn").instantiate()
-	save_load.is_save_mode = false
-	get_tree().root.add_child(save_load)
+	SceneManager.push_scene("res://source/ui/save_load_menu/save_load_menu.tscn")
 
 func _on_settings() -> void:
 	visible = false

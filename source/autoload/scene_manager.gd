@@ -47,7 +47,7 @@ func pop_scene() -> void:
 	if scene_stack.is_empty():
 		push_warning("SceneManager: Scene stack is empty")
 		return
-	var previous := scene_stack.pop_back()
+	var previous: String = scene_stack.pop_back()
 	await change_scene(previous, "instant")
 
 func get_current_scene() -> String:
