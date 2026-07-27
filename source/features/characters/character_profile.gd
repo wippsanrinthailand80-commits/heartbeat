@@ -8,8 +8,8 @@ extends Resource
 @export var default_emotion: String = "neutral"
 @export var description: String = ""
 @export var birthday: String = ""
-@export var likes: Array[String] = []
-@export var dislikes: Array[String] = []
+@export var likes: Array = []
+@export var dislikes: Array = []
 
 func get_portrait_path(emotion: String = "neutral") -> String:
 	if portraits.has(emotion):
