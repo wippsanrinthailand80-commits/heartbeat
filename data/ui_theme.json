@@ -1,0 +1,127 @@
+{
+	"_comment": "=== UI THEME CONFIG ===",
+	"_instructions": [
+		"Drop PNG files in the corresponding assets/art/ui/ subdirectories",
+		"Set the path below to point to your file (e.g. 'res://assets/art/ui/buttons/normal.png')",
+		"Leave a path empty or remove it to use the fallback color instead",
+		"Colors use RGBA format: [0.0-1.0, 0.0-1.0, 0.0-1.0, 0.0-1.0]",
+		"Font sizes are in pixels. Change the number to resize.",
+		"Reload the game after making changes (or restart the app)"
+	],
+
+	"backgrounds": {
+		"_comment": "Screen backgrounds. Drop a PNG to replace solid colors. Leave empty to use the color.",
+		"menu": {
+			"texture": "",
+			"color": [0.08, 0.08, 0.12, 1.0],
+			"_used_in": "main_menu, settings, save_load"
+		},
+		"dark": {
+			"texture": "",
+			"color": [0.05, 0.05, 0.08, 1.0],
+			"_used_in": "credits, splash"
+		},
+		"overlay": {
+			"texture": "",
+			"color": [0.0, 0.0, 0.0, 0.7],
+			"_used_in": "pause_menu, status_screen"
+		},
+		"gameplay": {
+			"texture": "",
+			"color": [0.1, 0.1, 0.15, 1.0],
+			"_used_in": "gameplay fallback"
+		},
+		"ending": {
+			"texture": "",
+			"color": [0.05, 0.05, 0.12, 1.0],
+			"_used_in": "ending_screen fallback"
+		}
+	},
+
+	"buttons": {
+		"_comment": "Button textures and colors. Drop PNGs to replace default buttons.",
+		"primary": {
+			"normal_texture": "",
+			"hover_texture": "",
+			"pressed_texture": "",
+			"disabled_texture": "",
+			"font_color": [1.0, 1.0, 1.0, 1.0],
+			"font_hover_color": [1.0, 0.85, 0.2, 1.0],
+			"font_pressed_color": [0.7, 0.7, 0.7, 1.0],
+			"font_disabled_color": [0.4, 0.4, 0.4, 1.0],
+			"bg_color": [0.15, 0.15, 0.25, 0.8],
+			"bg_hover_color": [0.2, 0.2, 0.35, 0.9],
+			"bg_pressed_color": [0.1, 0.1, 0.18, 0.9],
+			"border_color": [0.3, 0.3, 0.5, 0.6],
+			"corner_radius": 8,
+			"_used_in": "all primary buttons"
+		},
+		"secondary": {
+			"normal_texture": "",
+			"hover_texture": "",
+			"pressed_texture": "",
+			"disabled_texture": "",
+			"font_color": [0.8, 0.8, 0.8, 1.0],
+			"font_hover_color": [1.0, 0.85, 0.2, 1.0],
+			"font_pressed_color": [0.6, 0.6, 0.6, 1.0],
+			"font_disabled_color": [0.35, 0.35, 0.35, 1.0],
+			"bg_color": [0.1, 0.1, 0.18, 0.6],
+			"bg_hover_color": [0.15, 0.15, 0.25, 0.8],
+			"bg_pressed_color": [0.08, 0.08, 0.14, 0.8],
+			"border_color": [0.25, 0.25, 0.4, 0.4],
+			"corner_radius": 6,
+			"_used_in": "save/load slots, backlog close"
+		},
+		"icon": {
+			"normal_texture": "",
+			"hover_texture": "",
+			"pressed_texture": "",
+			"font_color": [0.7, 0.7, 0.8, 1.0],
+			"font_hover_color": [1.0, 0.85, 0.2, 1.0],
+			"bg_color": [0.0, 0.0, 0.0, 0.0],
+			"bg_hover_color": [0.2, 0.2, 0.35, 0.5],
+			"corner_radius": 4,
+			"_used_in": "HUD quick buttons (auto, skip, save, load)"
+		}
+	},
+
+	"dialogue": {
+		"_comment": "Dialogue box styling",
+		"panel_texture": "",
+		"panel_color": [0.05, 0.05, 0.1, 0.92],
+		"panel_border_color": [0.3, 0.3, 0.5, 0.5],
+		"panel_corner_radius": 12,
+		"speaker_font_color": [0.4, 0.8, 1.0, 1.0],
+		"text_font_color": [0.95, 0.95, 0.95, 1.0],
+		"continue_indicator_texture": "",
+		"continue_indicator_color": [0.5, 0.5, 0.6, 0.8]
+	},
+
+	"fonts": {
+		"_comment": "Font sizes by semantic name. Drop .ttf or .otf in assets/art/ui/fonts/ to override.",
+		"regular_font": "",
+		"bold_font": "",
+		"sizes": {
+			"tiny": 14,
+			"small": 18,
+			"normal": 22,
+			"button": 24,
+			"subtitle": 28,
+			"title": 32,
+			"heading": 48,
+			"hero": 64
+		}
+	},
+
+	"colors": {
+		"_comment": "Global color palette",
+		"accent": [0.4, 0.8, 1.0, 1.0],
+		"accent_hover": [1.0, 0.85, 0.2, 1.0],
+		"success": [0.3, 0.85, 0.4, 1.0],
+		"danger": [0.9, 0.3, 0.3, 1.0],
+		"text_primary": [0.95, 0.95, 0.95, 1.0],
+		"text_secondary": [0.6, 0.6, 0.65, 1.0],
+		"text_muted": [0.4, 0.4, 0.45, 1.0],
+		"heart_icon": [0.9, 0.3, 0.5, 1.0]
+	}
+}

@@ -14,6 +14,7 @@ config/features=PackedStringArray("4.7")
 
 EventBus="*res://source/autoload/event_bus.gd"
 GameState="*res://source/autoload/game_state.gd"
+UIThemeManager="*res://source/autoload/ui_theme_manager.gd"
 AffectionManager="*res://source/autoload/affection_manager.gd"
 SaveManager="*res://source/autoload/save_manager.gd"
 AudioManager="*res://source/autoload/audio_manager.gd"
