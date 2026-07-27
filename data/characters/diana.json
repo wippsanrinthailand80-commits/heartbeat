@@ -1,0 +1,18 @@
+{
+	"id": "diana",
+	"display_name": "Diana",
+	"color": "#a855f7",
+	"default_emotion": "neutral",
+	"description": "A mysterious transfer student with a passion for photography. She speaks softly but her presence is unforgettable.",
+	"birthday": "November 8",
+	"likes": ["photography", "tea", "classical music", "rainy days"],
+	"dislikes": ["being rushed", "crowds", "fake people"],
+	"portraits": {
+		"neutral": "res://assets/art/characters/diana/diana_neutral.png",
+		"happy": "res://assets/art/characters/diana/diana_happy.png",
+		"sad": "res://assets/art/characters/diana/diana_sad.png",
+		"angry": "res://assets/art/characters/diana/diana_angry.png",
+		"blush": "res://assets/art/characters/diana/diana_blush.png",
+		"surprised": "res://assets/art/characters/diana/diana_surprised.png"
+	}
+}

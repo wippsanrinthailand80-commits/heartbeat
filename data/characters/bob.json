@@ -1,0 +1,18 @@
+{
+	"id": "bob",
+	"display_name": "Bob",
+	"color": "#4ecdc4",
+	"default_emotion": "neutral",
+	"description": "A laid-back guy who's surprisingly skilled at cooking. He always seems to know what to say to make people feel better.",
+	"birthday": "July 22",
+	"likes": ["cooking", "hiking", "video games", "music"],
+	"dislikes": ["early mornings", "loud noises", "spicy food"],
+	"portraits": {
+		"neutral": "res://assets/art/characters/bob/bob_neutral.png",
+		"happy": "res://assets/art/characters/bob/bob_happy.png",
+		"sad": "res://assets/art/characters/bob/bob_sad.png",
+		"angry": "res://assets/art/characters/bob/bob_angry.png",
+		"blush": "res://assets/art/characters/bob/bob_blush.png",
+		"surprised": "res://assets/art/characters/bob/bob_surprised.png"
+	}
+}

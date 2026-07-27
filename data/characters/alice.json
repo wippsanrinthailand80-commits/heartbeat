@@ -1,0 +1,18 @@
+{
+	"id": "alice",
+	"display_name": "Alice",
+	"color": "#ff6b9d",
+	"default_emotion": "neutral",
+	"description": "A bright and cheerful girl who loves reading and stargazing. She has a warm smile that can light up any room.",
+	"birthday": "March 15",
+	"likes": ["reading", "stargazing", "coffee", "cats"],
+	"dislikes": ["spiders", "thunder", "bitter food"],
+	"portraits": {
+		"neutral": "res://assets/art/characters/alice/alice_neutral.png",
+		"happy": "res://assets/art/characters/alice/alice_happy.png",
+		"sad": "res://assets/art/characters/alice/alice_sad.png",
+		"angry": "res://assets/art/characters/alice/alice_angry.png",
+		"blush": "res://assets/art/characters/alice/alice_blush.png",
+		"surprised": "res://assets/art/characters/alice/alice_surprised.png"
+	}
+}

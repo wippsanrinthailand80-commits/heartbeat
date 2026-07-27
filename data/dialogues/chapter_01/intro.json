@@ -1,0 +1,164 @@
+{
+	"id": "chapter_01_intro",
+	"start_line": "start",
+	"metadata": {
+		"title": "Chapter 1: A New Beginning",
+		"author": "Your Junior",
+		"description": "The first day at a new school. Everything feels fresh and exciting."
+	},
+	"lines": [
+		{
+			"id": "start",
+			"speaker": "",
+			"text": "The morning sun filters through the curtains as you wake up. Today is the first day at your new school.",
+			"emotion": "neutral",
+			"narrator": true,
+			"next": "wake_up",
+			"bgm": "morning",
+			"background": "res://assets/art/backgrounds/bedroom.png"
+		},
+		{
+			"id": "wake_up",
+			"speaker": "",
+			"text": "You quickly get ready and head out the door. The campus is bigger than you expected.",
+			"emotion": "neutral",
+			"narrator": true,
+			"next": "meet_alice"
+		},
+		{
+			"id": "meet_alice",
+			"speaker": "alice",
+			"text": "Oh! You must be the new student! I'm Alice. Welcome to our school!",
+			"emotion": "happy",
+			"next": "alice_intro_2",
+			"effects": [
+				{"type": "set_flag", "key": "met_alice", "value": true},
+				{"type": "affection", "character": "alice", "axis": "trust", "amount": 5.0}
+			]
+		},
+		{
+			"id": "alice_intro_2",
+			"speaker": "alice",
+			"text": "Do you need help finding your classroom? I'd be happy to show you around!",
+			"emotion": "neutral",
+			"choices": [
+				{
+					"id": "accept_help",
+					"text": "Yes please! I'm completely lost.",
+					"target": "alice_help",
+					"effects": [
+						{"type": "affection", "character": "alice", "axis": "trust", "amount": 3.0},
+						{"type": "set_flag", "key": "accepted_alice_help", "value": true}
+					]
+				},
+				{
+					"id": "decline_help",
+					"text": "No thanks, I'll figure it out myself.",
+					"target": "alice_decline",
+					"effects": [
+						{"type": "affection", "character": "alice", "axis": "comfort", "amount": -2.0}
+					]
+				},
+				{
+					"id": "flirt_help",
+					"text": "Only if you promise to be my guide for the whole day.",
+					"target": "alice_flirt",
+					"conditions": [
+						{"type": "flag", "key": "met_alice", "value": true}
+					],
+					"effects": [
+						{"type": "affection", "character": "alice", "axis": "attraction", "amount": 5.0}
+					]
+				}
+			]
+		},
+		{
+			"id": "alice_help",
+			"speaker": "alice",
+			"text": "Great! Your classroom is on the second floor. Follow me!",
+			"emotion": "happy",
+			"next": "walk_together",
+			"sfx": "footsteps"
+		},
+		{
+			"id": "alice_decline",
+			"speaker": "alice",
+			"text": "Oh... okay. Well, if you change your mind, I'm usually in the library during lunch.",
+			"emotion": "sad",
+			"next": "walk_alone"
+		},
+		{
+			"id": "alice_flirt",
+			"speaker": "alice",
+			"text": "W-what?! You're... you're something else, you know that?",
+			"emotion": "blush",
+			"next": "walk_together"
+		},
+		{
+			"id": "walk_together",
+			"speaker": "",
+			"text": "You walk with Alice through the bustling hallways. She points out the cafeteria, the library, and the rooftop access.",
+			"narrator": true,
+			"next": "meet_bob"
+		},
+		{
+			"id": "walk_alone",
+			"speaker": "",
+			"text": "You wander the halls alone, eventually finding your classroom. The day passes without incident.",
+			"narrator": true,
+			"next": "lunch_alone"
+		},
+		{
+			"id": "meet_bob",
+			"speaker": "bob",
+			"text": "Hey, Alice! Who's your friend here?",
+			"emotion": "neutral",
+			"next": "bob_intro",
+			"effects": [
+				{"type": "set_flag", "key": "met_bob", "value": true},
+				{"type": "affection", "character": "bob", "axis": "comfort", "amount": 3.0}
+			]
+		},
+		{
+			"id": "bob_intro",
+			"speaker": "bob",
+			"text": "Nice to meet you! I'm Bob. I run the cooking club. You should totally join us sometime!",
+			"emotion": "happy",
+			"next": "lunch_together"
+		},
+		{
+			"id": "lunch_together",
+			"speaker": "",
+			"text": "You spend lunch with Alice and Bob. The food is great and the conversation is even better.",
+			"narrator": true,
+			"next": "end_chapter",
+			"bgm": "lunch",
+			"effects": [
+				{"type": "affection", "character": "alice", "axis": "comfort", "amount": 2.0},
+				{"type": "affection", "character": "bob", "axis": "comfort", "amount": 2.0},
+				{"type": "advance_time"}
+			]
+		},
+		{
+			"id": "lunch_alone",
+			"speaker": "",
+			"text": "You eat lunch by yourself on a bench near the garden. It's peaceful, but you feel a bit lonely.",
+			"narrator": true,
+			"next": "end_chapter",
+			"effects": [
+				{"type": "advance_time"}
+			]
+		},
+		{
+			"id": "end_chapter",
+			"speaker": "",
+			"text": "As the school bell rings, you realize this is just the beginning of something special.",
+			"narrator": true,
+			"next": "",
+			"effects": [
+				{"type": "set_flag", "key": "intro_completed", "value": true},
+				{"type": "unlock_cg", "cg_id": "chapter1_end"}
+			]
+		}
+	]
+}

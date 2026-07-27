@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=3 uid="uid://dialogue_box"]
+
+[ext_resource type="Script" path="res://source/ui/dialogue_ui/dialogue_box.gd" id="1_dialogue_box"]
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dialogue_box")
+
+[node name="PortraitDisplay" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 100.0
+offset_right = -20.0
+offset_bottom = 700.0
+grow_horizontal = 0
+stretch_mode = 6
+
+[node name="DialoguePanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+offset_left = 40.0
+offset_right = -40.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBox" type="VBoxContainer" parent="DialoguePanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SpeakerLabel" type="Label" parent="DialoguePanel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+
+[node name="DialogueLabel" type="RichTextLabel" parent="DialoguePanel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="ContinueIndicator" type="TextureRect" parent="DialoguePanel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 10
+custom_minimum_size = Vector2(20, 20)
+visible = false
+stretch_mode = 5
+
+[node name="NamePanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 60.0
+offset_top = -330.0
+offset_right = 300.0
+offset_bottom = -300.0
+
+[node name="NameLabel" type="Label" parent="NamePanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Speaker"
+
+[node name="ChoiceContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -150.0
+offset_right = 300.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+visible = false
+
+[node name="TextSpeedTimer" type="Timer" parent="."]
+wait_time = 0.03
+one_shot = true

@@ -1,0 +1,22 @@
+# Godot 4 specific
+.godot/
+*.import
+export_credentials.cfg
+
+# Builds
+builds/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace
+
+# Godot autosaves
+*.autosave

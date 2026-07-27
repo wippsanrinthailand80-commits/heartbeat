@@ -1,0 +1,13 @@
+{
+	"settings": {
+		"bgm_volume": 80,
+		"sfx_volume": 80,
+		"voice_volume": 90,
+		"master_volume": 100,
+		"text_speed": 50,
+		"auto_speed": 3.0,
+		"fullscreen": true,
+		"vsync": true,
+		"language": "en"
+	}
+}

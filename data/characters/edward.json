@@ -1,0 +1,18 @@
+{
+	"id": "edward",
+	"display_name": "Edward",
+	"color": "#f59e0b",
+	"default_emotion": "neutral",
+	"description": "The student council president who seems perfect on the outside. But beneath that polished exterior lies a complicated soul.",
+	"birthday": "January 3",
+	"likes": ["chess", "classical literature", "black tea", "order"],
+	"dislikes": ["chaos", "laziness", "being called perfect"],
+	"portraits": {
+		"neutral": "res://assets/art/characters/edward/edward_neutral.png",
+		"happy": "res://assets/art/characters/edward/edward_happy.png",
+		"sad": "res://assets/art/characters/edward/edward_sad.png",
+		"angry": "res://assets/art/characters/edward/edward_angry.png",
+		"blush": "res://assets/art/characters/edward/edward_blush.png",
+		"surprised": "res://assets/art/characters/edward/edward_surprised.png"
+	}
+}
