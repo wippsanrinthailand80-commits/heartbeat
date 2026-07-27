@@ -82,6 +82,9 @@ func _input(event: InputEvent) -> void:
 	if not visible:
 		return
 
+	if choice_container.visible:
+		return
+
 	if event.is_action_pressed("dialogue_advance"):
 		if is_typing:
 			_complete_text_immediately()
