@@ -27,7 +27,7 @@ func _load_credits() -> void:
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
-	var files: Array[String] = []
+	var files: Array = []
 
 	while file_name != "":
 		if file_name.ends_with(".json"):
@@ -37,7 +37,7 @@ func _load_credits() -> void:
 
 	files.sort()
 
-	for file_name in files:
+	for fname in files:
 		var path := CREDITS_DIR + file_name
 		var file := FileAccess.open(path, FileAccess.READ)
 		if file == null:
