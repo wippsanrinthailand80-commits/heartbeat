@@ -29,8 +29,6 @@ func _input(event: InputEvent) -> void:
 		_handle_screen_touch(event)
 	elif event is InputEventScreenDrag:
 		_handle_screen_drag(event)
-	elif event is InputEventScreenPinch:
-		_handle_screen_pinch(event)
 
 func _handle_screen_touch(event: InputEventScreenTouch) -> void:
 	var idx: int = event.index
@@ -83,11 +81,9 @@ func _handle_screen_drag(event: InputEventScreenDrag) -> void:
 			_pinch_start_distance = current_distance
 			_is_pinching = true
 		else:
-			var scale_factor: float = current_distance / _pinch_start_distance if _pinch_start_distance > 0 else 1.0
-			pinch_detected.emit(scale_factor)
-
-func _handle_screen_pinch(event: InputEventScreenPinch) -> void:
-	pinch_detected.emit(event.factor)
+			if _pinch_start_distance > 0:
+				var scale_factor: float = current_distance / _pinch_start_distance
+				pinch_detected.emit(scale_factor)
 
 func _on_long_press_timer_timeout() -> void:
 	if _is_long_press_pending:

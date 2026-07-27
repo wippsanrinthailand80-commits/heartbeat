@@ -33,7 +33,7 @@ func _load_credits() -> void:
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
-	var files: Array = []
+	var files := []
 
 	while file_name != "":
 		if file_name.ends_with(".json"):
@@ -53,22 +53,26 @@ func _load_credits() -> void:
 		if json.parse(file.get_as_text()) != OK:
 			continue
 
-		var data: Dictionary = json.data
-		var section: String = data.get("section", "Unknown")
-		var entries: Array = data.get("entries", [])
+		var data = json.data
+		if not data is Dictionary:
+			continue
+		var section = data.get("section", "Unknown")
+		var entries = data.get("entries", [])
 
-		_add_section_header(section)
+		_add_section_header(str(section))
 
 		for entry in entries:
-			var role: String = entry.get("role", "")
-			var name_display: String = ""
+			if not entry is Dictionary:
+				continue
+			var role = str(entry.get("role", ""))
+			var name_display := ""
 
 			if entry.has("name_encrypted"):
-				name_display = _decrypt_name(entry.get("name_encrypted", ""), entry.get("algorithm", "base64"))
+				name_display = _decrypt_name(str(entry.get("name_encrypted", "")), str(entry.get("algorithm", "base64")))
 			else:
-				name_display = entry.get("name", "Unknown")
+				name_display = str(entry.get("name", "Unknown"))
 
-			var note: String = entry.get("note", "")
+			var note = str(entry.get("note", ""))
 			_add_credit_entry(role, name_display, note)
 
 		_add_spacer()
