@@ -36,6 +36,9 @@ func modify_affection(char_id: String, axis: String, amount: float) -> void:
 		push_warning("AffectionManager: Unknown character '%s'" % char_id)
 		return
 
+	if characters[char_id].get("axis_locked", false):
+		return
+
 	var char_data: Dictionary = characters[char_id]
 	var old_value: float = char_data.get(axis, 0.0)
 	var new_value: float = clampf(old_value + amount, MIN_AFFECTION, char_data["max_affection"])

@@ -29,8 +29,14 @@ func is_on_route() -> bool:
 func get_current_route() -> String:
 	return current_route
 
+func is_route_started(character_id: String) -> bool:
+	return character_id in route_history
+
 func is_route_completed(character_id: String) -> bool:
-	return character_id in GameState.unlocked_routes
+	return (character_id + "_best_ending") in GameState.unlocked_endings \
+		or (character_id + "_good_ending") in GameState.unlocked_endings \
+		or (character_id + "_normal_ending") in GameState.unlocked_endings \
+		or (character_id + "_bad_ending") in GameState.unlocked_endings
 
 func get_completed_routes() -> Array[String]:
 	return GameState.unlocked_routes.duplicate()

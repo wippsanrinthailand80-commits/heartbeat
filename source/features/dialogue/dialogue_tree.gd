@@ -51,6 +51,13 @@ func evaluate_choices(current_id: String) -> Array[Dictionary]:
 					var char_id: String = condition.get("character", "")
 					if AffectionManager.get_affection(char_id) <= value:
 						valid = false
+				"affection_below":
+					var char_id: String = condition.get("character", "")
+					if AffectionManager.get_affection(char_id) >= value:
+						valid = false
+				"day_equals":
+					if GameState.current_day != value:
+						valid = false
 				"has_item":
 					if not GameState.has_item(key):
 						valid = false
@@ -62,7 +69,7 @@ func evaluate_choices(current_id: String) -> Array[Dictionary]:
 func get_total_lines() -> int:
 	return lines.size()
 
-func static load_from_json(json_path: String) -> DialogueTree:
+static func load_from_json(json_path: String) -> DialogueTree:
 	var file := FileAccess.open(json_path, FileAccess.READ)
 	if file == null:
 		push_error("DialogueTree: Failed to open: %s" % json_path)
