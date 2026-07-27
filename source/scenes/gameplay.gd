@@ -44,6 +44,7 @@ func _connect_signals() -> void:
 	EventBus.dialogue_ended.connect(_on_dialogue_ended)
 	EventBus.cg_unlocked.connect(_on_cg_unlocked)
 	EventBus.affection_changed.connect(_on_affection_changed)
+	RouteManager.route_ended.connect(_on_route_ended)
 
 func _load_intro() -> void:
 	var intro_path := "res://data/dialogues/chapter_01/intro.json"
@@ -68,6 +69,9 @@ func _on_affection_changed(_char_id: String, _axis: String, _old: float, _new: f
 
 func _on_scene_transition_started(scene_path: String) -> void:
 	load_scene_background(scene_path)
+
+func _on_route_ended(character_id: String, ending_id: String) -> void:
+	SceneManager.push_scene("res://source/ui/ending/ending_screen.tscn")
 
 func load_scene_background(path: String) -> void:
 	if current_background_path == path:

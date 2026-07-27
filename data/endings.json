@@ -67,5 +67,23 @@
 			"secret": ["true_ending"]
 		}
 	},
+	"ending_info": {
+		"alice_good_1": {
+			"title": "A Love That Blooms",
+			"description": "Your bond with Alice has grown into something truly special. Together, you face the future with hope and joy.",
+			"image": "res://assets/art/endings/alice_good.png"
+		},
+		"bob_good_1": {
+			"title": "Unbreakable Trust",
+			"description": "Through every challenge, your friendship with Bob has only grown stronger. This is a bond that will last a lifetime.",
+			"image": "res://assets/art/endings/bob_good.png"
+		},
+		"true_ending": {
+			"title": "Heartbeat",
+			"description": "Every path, every choice, every moment has led to this. You have found the true meaning of connection.",
+			"image": "res://assets/art/endings/true_ending.png"
+		}
+	},
+	"_note_ending_info": "Cousin: add ending_info entries for each new ending ID you create. Include title, description, and image path. Image files go in res://assets/art/endings/",
 	"_note": "Cousin: fill in bad ending IDs and adjust counts per character. Total bad must equal 66. Alice and Bob each have 1 good. Secret ending is 'true_ending'."
 }

@@ -14,6 +14,9 @@ var is_new_game: bool = true
 var current_day: int = 1
 var current_time_of_day: String = "morning"
 
+var last_ending_character: String = ""
+var last_ending_id: String = ""
+
 const STARTING_FLAGS := {
 	"intro_completed": false,
 	"met_alice": false,

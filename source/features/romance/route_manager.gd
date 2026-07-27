@@ -136,6 +136,8 @@ func complete_route(character_id: String, ending_id: String = "") -> void:
 
 	GameState.unlock_ending(ending_id)
 	GameState.set_flag(character_id + "_ending", ending_id)
+	GameState.last_ending_character = character_id
+	GameState.last_ending_id = ending_id
 
 	route_ended.emit(character_id, ending_id)
 	current_route = ""
