@@ -37,7 +37,7 @@ window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep"
 window/stretch/aspect_ratio=1.7778
-window/handheld/orientation=1
+window/handheld/orientation=0
 
 [input]
 
