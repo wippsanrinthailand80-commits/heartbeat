@@ -117,4 +117,6 @@ Create JSON files in `data/dialogues/chapter_XX/`:
 
 ## License
 
-MIT
+Proprietary — All Rights Reserved. See [LICENSE](LICENSE) for details.
+Copyright (c) 2025 wippsanrinthailand80-commits. No part of this project may be
+copied, distributed, or modified without written permission.

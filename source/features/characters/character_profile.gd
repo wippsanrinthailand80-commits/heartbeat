@@ -1,3 +1,5 @@
+# Copyright (c) 2025 wippsanrinthailand80-commits. All Rights Reserved.
+# Unauthorized copying, modification, distribution, or reproduction is strictly prohibited.
 class_name CharacterProfile
 extends Resource
 

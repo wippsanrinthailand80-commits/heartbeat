@@ -1,3 +1,5 @@
+# Copyright (c) 2025 wippsanrinthailand80-commits. All Rights Reserved.
+# Unauthorized copying, modification, distribution, or reproduction is strictly prohibited.
 extends Node
 
 @export var target_margin: MarginContainer

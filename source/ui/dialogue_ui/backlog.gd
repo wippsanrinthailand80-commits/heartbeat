@@ -1,3 +1,5 @@
+# Copyright (c) 2025 wippsanrinthailand80-commits. All Rights Reserved.
+# Unauthorized copying, modification, distribution, or reproduction is strictly prohibited.
 extends Control
 
 @onready var backlog_list: ItemList = $Panel/Margin/VBox/BacklogList

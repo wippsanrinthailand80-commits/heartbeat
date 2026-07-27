@@ -1,3 +1,5 @@
+# Copyright (c) 2025 wippsanrinthailand80-commits. All Rights Reserved.
+# Unauthorized copying, modification, distribution, or reproduction is strictly prohibited.
 extends Control
 
 @onready var scroll: ScrollContainer = $Panel/Margin/VBox/ScrollContainer
@@ -140,20 +142,40 @@ func _add_spacer() -> void:
 	content.add_child(spacer)
 
 func _add_copyright() -> void:
-	var spacer := Control.new()
+	var spacer := Label.new()
+	spacer.text = ""
 	spacer.custom_minimum_size.y = 20
 	content.add_child(spacer)
 
-	var label := Label.new()
-	label.text = "Made with Godot Engine"
-	label.add_theme_font_size_override("font_size", 14)
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4))
-	content.add_child(label)
+	var separator := HSeparator.new()
+	separator.custom_minimum_size.y = 1
+	separator.add_theme_stylebox_override("separator", StyleBoxLine.new())
+	content.add_child(separator)
 
-	var year_label := Label.new()
-	year_label.text = "2025"
-	year_label.add_theme_font_size_override("font_size", 14)
-	year_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	year_label.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4))
-	content.add_child(year_label)
+	var copyright := Label.new()
+	copyright.text = "Copyright (c) 2025 wippsanrinthailand80-commits"
+	copyright.add_theme_font_size_override("font_size", 16)
+	copyright.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	copyright.add_theme_color_override("font_color", Color(0.7, 0.7, 0.7))
+	content.add_child(copyright)
+
+	var rights := Label.new()
+	rights.text = "All Rights Reserved. Unauthorized copying, modification,\ndistribution, or reproduction is strictly prohibited."
+	rights.add_theme_font_size_override("font_size", 13)
+	rights.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	rights.add_theme_color_override("font_color", Color(0.5, 0.5, 0.5))
+	rights.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	rights.custom_minimum_size.y = 40
+	content.add_child(rights)
+
+	var engine := Label.new()
+	engine.text = "Made with Godot Engine"
+	engine.add_theme_font_size_override("font_size", 14)
+	engine.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	engine.add_theme_color_override("font_color", Color(0.4, 0.4, 0.4))
+	engine.add_theme_color_override("font_hover_color", Color(0.3, 0.6, 1.0))
+	engine.mouse_filter = Control.MOUSE_FILTER_STOP
+	engine.gui_input.connect(func(event):
+		if event is InputEventMouseButton and event.pressed:
+			OS.shell_open("https://godotengine.org"))
+	content.add_child(engine)
