@@ -5,6 +5,7 @@ extends Control
 
 func _ready() -> void:
 	visible = false
+	add_to_group("backlog_ui")
 	EventBus.backlog_updated.connect(_refresh_backlog)
 	close_button.pressed.connect(_on_close_pressed)
 

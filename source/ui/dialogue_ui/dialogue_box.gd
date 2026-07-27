@@ -76,7 +76,7 @@ func _on_text_speed_timer_timeout() -> void:
 		is_typing = false
 		continue_indicator.visible = true
 		if Input.is_action_pressed("dialogue_skip"):
-			EventBus.skip_mode_toggled.emit(true)
+			DialogueManager.toggle_skip_mode()
 
 func _input(event: InputEvent) -> void:
 	if not visible:

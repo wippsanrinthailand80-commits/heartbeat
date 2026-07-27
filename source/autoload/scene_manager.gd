@@ -1,10 +1,10 @@
-extends CanvasLayer
+extends Node
 
 var current_scene_path: String = ""
 var scene_stack: Array[String] = []
 
 func _ready() -> void:
-	layer = 99
+	pass
 
 func change_scene(path: String, transition: String = "fade") -> void:
 	if path == current_scene_path:

@@ -73,7 +73,7 @@ func _on_save_pressed() -> void:
 		_perform_save()
 
 func _perform_save() -> void:
-	if SaveManager.save_game(selected_slot, {}):
+	if SaveManager.save_game(selected_slot):
 		_update_ui()
 
 func _on_load_pressed() -> void:

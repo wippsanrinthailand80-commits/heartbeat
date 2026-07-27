@@ -13,7 +13,7 @@ func _ensure_save_dir() -> void:
 	if not DirAccess.dir_exists_absolute(SAVE_DIR):
 		DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 
-func save_game(slot: int, save_data: Dictionary) -> bool:
+func save_game(slot: int) -> bool:
 	if slot < 0 or slot >= MAX_SAVE_SLOTS:
 		push_error("SaveManager: Invalid slot %d" % slot)
 		return false
@@ -166,7 +166,7 @@ func load_meta_progress() -> Dictionary:
 	return json.data
 
 func quick_save() -> bool:
-	return save_game(0, {})
+	return save_game(0)
 
 func quick_load() -> bool:
 	return apply_save_data(0)

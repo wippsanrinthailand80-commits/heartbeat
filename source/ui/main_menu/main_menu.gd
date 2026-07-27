@@ -26,7 +26,7 @@ func _ready() -> void:
 func _on_new_game() -> void:
 	GameState.reset_state()
 	AffectionManager.characters.clear()
-	SceneManager.change_scene("res://source/scenes/locations/prologue.tscn")
+	SceneManager.change_scene("res://source/scenes/gameplay.tscn")
 
 func _on_continue() -> void:
 	if SaveManager.quick_load():

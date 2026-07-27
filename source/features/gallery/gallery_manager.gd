@@ -1,6 +1,6 @@
 extends Node
 
-var unlocked_cgs: Dictionary = {}
+var cg_registry: Dictionary = {}
 
 func _ready() -> void:
 	pass
@@ -12,7 +12,7 @@ func unlock_cg(cg_id: String) -> void:
 	GameState.unlock_cg(cg_id)
 
 func get_all_cgs() -> Array[Dictionary]:
-	return unlocked_cgs.values()
+	return cg_registry.values()
 
 func get_unlocked_cgs() -> Array[String]:
 	return GameState.unlocked_cgs.duplicate()
@@ -20,11 +20,11 @@ func get_unlocked_cgs() -> Array[String]:
 func get_cg_count() -> Dictionary:
 	return {
 		"unlocked": GameState.unlocked_cgs.size(),
-		"total": unlocked_cgs.size(),
+		"total": cg_registry.size(),
 	}
 
 func register_cg(cg_id: String, path: String, title: String = "", description: String = "") -> void:
-	unlocked_cgs[cg_id] = {
+	cg_registry[cg_id] = {
 		"id": cg_id,
 		"path": path,
 		"title": title,
@@ -46,11 +46,11 @@ func load_cg_registry(path: String) -> void:
 		register_cg(cg_id, cg_info.get("path", ""), cg_info.get("title", ""), cg_info.get("description", ""))
 
 func get_cg_info(cg_id: String) -> Dictionary:
-	return unlocked_cgs.get(cg_id, {})
+	return cg_registry.get(cg_id, {})
 
 func get_ending_cg(character_id: String) -> Array[Dictionary]:
 	var results: Array[Dictionary] = []
-	for cg_id in unlocked_cgs:
+	for cg_id in cg_registry:
 		if cg_id.begins_with(character_id):
-			results.append(unlocked_cgs[cg_id])
+			results.append(cg_registry[cg_id])
 	return results

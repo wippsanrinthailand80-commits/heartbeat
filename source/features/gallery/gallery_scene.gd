@@ -3,7 +3,8 @@ extends Control
 @onready var grid_container: GridContainer = $Panel/Margin/VBox/ScrollContainer/GridContainer
 @onready var title_label: Label = $Panel/TitleLabel
 @onready var back_button: Button = $Panel/Margin/VBox/BackButton
-@onready var preview_panel: TextureRect = $PreviewPanel
+@onready var preview_panel: PanelContainer = $PreviewPanel
+@onready var preview_texture: TextureRect = $PreviewPanel/TextureRect
 @onready var cg_title_label: Label = $PreviewPanel/TitleLabel
 
 func _ready() -> void:
@@ -46,7 +47,7 @@ func _on_cg_pressed(cg: Dictionary) -> void:
 	var path: String = cg.get("path", "")
 	if ResourceLoader.exists(path):
 		preview_panel.visible = true
-		preview_panel.get_node("TextureRect").texture = load(path)
+		preview_texture.texture = load(path)
 		cg_title_label.text = cg.get("title", cg.get("id", ""))
 
 func _on_back_pressed() -> void:

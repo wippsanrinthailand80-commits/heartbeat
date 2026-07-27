@@ -37,8 +37,28 @@ func start_dialogue_from_file(json_path: String) -> void:
 		start_dialogue(tree)
 
 func start_dialogue_from_id(tree_id: String) -> void:
-	var path := "res://data/dialogues/%s.json" % tree_id
-	start_dialogue_from_file(path)
+	var dir := DirAccess.open("res://data/dialogues/")
+	if dir == null:
+		push_error("DialogueManager: Cannot open dialogues directory")
+		return
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".json"):
+			var base_name := file_name.get_basename()
+			if base_name == tree_id:
+				start_dialogue_from_file("res://data/dialogues/" + file_name)
+				return
+			for sub in ["chapter_01", "chapter_02", "chapter_03", "chapter_04", "chapter_05"]:
+				if dir.dir_exists(sub):
+					var sub_path := "res://data/dialogues/%s/%s.json" % [sub, tree_id]
+					if ResourceLoader.exists(sub_path):
+						start_dialogue_from_file(sub_path)
+						return
+		file_name = dir.get_next()
+	dir.list_dir_end()
+	push_error("DialogueManager: Dialogue not found: %s" % tree_id)
 
 func advance() -> void:
 	if not is_dialogue_active:
@@ -149,6 +169,23 @@ func make_choice(choice_index: int) -> void:
 					effect.get("axis", "trust"),
 					effect.get("amount", 0.0)
 				)
+			"add_item":
+				GameState.add_item(
+					effect.get("item_id", ""),
+					effect.get("item_name", ""),
+					effect.get("description", "")
+				)
+			"remove_item":
+				GameState.remove_item(effect.get("item_id", ""))
+			"unlock_cg":
+				GameState.unlock_cg(effect.get("cg_id", ""))
+			"unlock_route":
+				GameState.unlock_route(effect.get("character", ""))
+				EventBus.route_locked.emit(effect.get("character", ""))
+			"advance_time":
+				GameState.advance_time()
+			"change_scene":
+				SceneManager.change_scene(effect.get("scene", ""))
 
 	EventBus.choice_made.emit(choice_id, choice_index)
 	is_waiting_for_input = false

@@ -24,7 +24,7 @@ func evaluate_conditions() -> bool:
 	for condition in conditions:
 		var type: String = condition.get("type", "flag")
 		var key: String = condition.get("key", "")
-		var value: Variant = condition.get("value", true)
+		var value: Variant = condition.get("value", 0.0)
 
 		match type:
 			"flag":
