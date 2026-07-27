@@ -30,6 +30,7 @@ func _ready() -> void:
 	text_speed_timer.timeout.connect(_on_text_speed_timer_timeout)
 
 	choice_container.visible = false
+	dialogue_panel.gui_input.connect(_on_dialogue_panel_input)
 	apply_settings()
 
 func apply_settings() -> void:
@@ -78,19 +79,22 @@ func _on_text_speed_timer_timeout() -> void:
 		if Input.is_action_pressed("dialogue_skip"):
 			DialogueManager.toggle_skip_mode()
 
-func _input(event: InputEvent) -> void:
-	if not visible:
-		return
-
+func _on_dialogue_panel_input(event: InputEvent) -> void:
 	if choice_container.visible:
 		return
-
-	if event.is_action_pressed("dialogue_advance"):
+	if not DialogueManager.is_dialogue_active:
+		return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if is_typing:
 			_complete_text_immediately()
 		elif is_text_complete:
 			DialogueManager.advance()
-		get_viewport().set_input_as_handled()
+
+func _input(event: InputEvent) -> void:
+	if not visible:
+		return
+	if choice_container.visible:
+		return
 
 	if event.is_action_pressed("dialogue_auto"):
 		DialogueManager.toggle_auto_mode()
@@ -121,12 +125,17 @@ func _on_choices_presented(choices: Array) -> void:
 		var button := Button.new()
 		button.text = choice.get("text", "Choice %d" % (i + 1))
 		button.custom_minimum_size = Vector2(600, 80)
-		button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		button.mouse_filter = Control.MOUSE_FILTER_STOP
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.pressed.connect(_on_choice_button_pressed.bind(i))
+		button.gui_input.connect(_on_choice_input.bind(i))
 		choice_container.add_child(button)
 
+func _on_choice_input(event: InputEvent, _index: int) -> void:
+	if event is InputEventScreenTouch and not event.pressed:
+		get_viewport().set_input_as_handled()
+
 func _on_choice_button_pressed(index: int) -> void:
+	get_viewport().set_input_as_handled()
 	DialogueManager.make_choice(index)
 	choice_container.visible = false
 
