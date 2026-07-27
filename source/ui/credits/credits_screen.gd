@@ -8,6 +8,15 @@ extends Control
 const CREDITS_DIR := "res://data/credits/"
 
 func _ready() -> void:
+	title_label.add_theme_font_size_override("font_size", 36)
+	var margin: MarginContainer = $Panel/Margin
+	margin.add_theme_constant_override("margin_left", 20)
+	margin.add_theme_constant_override("margin_top", 50)
+	margin.add_theme_constant_override("margin_right", 20)
+	margin.add_theme_constant_override("margin_bottom", 20)
+	var content_box: VBoxContainer = $Panel/Margin/VBox/ScrollContainer/Content
+	content_box.add_theme_constant_override("separation", 4)
+	close_button.add_theme_font_size_override("font_size", 20)
 	close_button.pressed.connect(_on_close)
 	_load_credits()
 
