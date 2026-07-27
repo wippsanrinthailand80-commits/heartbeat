@@ -20,7 +20,9 @@ func _load_credits() -> void:
 
 	var dir := DirAccess.open(CREDITS_DIR)
 	if dir == null:
-		_add_label("No credits available.")
+		var fallback := Label.new()
+		fallback.text = "No credits available."
+		content.add_child(fallback)
 		return
 
 	dir.list_dir_begin()

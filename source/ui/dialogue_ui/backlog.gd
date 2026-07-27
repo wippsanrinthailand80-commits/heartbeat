@@ -35,7 +35,7 @@ func _refresh_backlog() -> void:
 	if backlog_list.item_count > 0:
 		var last := backlog_list.item_count - 1
 		backlog_list.select(last)
-		backlog_list.ensure_item_visible(last)
+		backlog_list.ensure_current_is_visible()
 		backlog_list.deselect(last)
 
 func _on_close_pressed() -> void:
